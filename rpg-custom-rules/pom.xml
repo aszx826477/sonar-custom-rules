@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.sonarsource.samples</groupId>
+	<artifactId>rpg-custom-rules</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>sonar-plugin</packaging>
+
+	<name>SonarQube RPG Custom Rules Example</name>
+	<description>RPG Custom Rules Example for SonarQube</description>
+	<inceptionYear>2016</inceptionYear>
+
+	<properties>		
+		<sonar.version>6.7.4</sonar.version>
+		<sonarrpg.version>2.3.0.1187</sonarrpg.version>
+	</properties>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.sonarsource.sonarqube</groupId>
+			<artifactId>sonar-plugin-api</artifactId>
+			<version>${sonar.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sonarsource.rpg</groupId>
+			<artifactId>sonar-rpg-plugin</artifactId>
+			<type>sonar-plugin</type>
+			<version>${sonarrpg.version}</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/lib/sonar-rpg-plugin-${sonarrpg.version}.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+			<version>4.11</version>
+		</dependency>
+		<dependency>
+			<groupId>org.easytesting</groupId>
+			<artifactId>fest-assert</artifactId>
+			<version>1.4</version>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.sonarsource.sonar-packaging-maven-plugin</groupId>
+				<artifactId>sonar-packaging-maven-plugin</artifactId>
+				<version>1.17</version>
+				<extensions>true</extensions>
+				<configuration>
+					<pluginKey>rpg-custom</pluginKey>
+					<pluginName>RPG Custom Rules</pluginName>
+					<pluginClass>com.sonarsource.rpg.example.MyRpgCustomPlugin</pluginClass>
+					<sonarLintSupported>true</sonarLintSupported>
+					<sonarQubeMinVersion>6.7</sonarQubeMinVersion>
+					<basePlugin>rpg</basePlugin>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.6.0</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+
+</project>
+    
